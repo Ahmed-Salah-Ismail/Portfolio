@@ -282,3 +282,42 @@ document.addEventListener("click", function (e) {
     }
   });
 });
+document.addEventListener("DOMContentLoaded", () => {
+  const menuBtn = document.getElementById("mobile-menu-btn");
+  const dropdownMenu = document.getElementById("dropdown-menu");
+  const dropdownLinks = document.querySelectorAll(".dropdown-link");
+
+  menuBtn?.addEventListener("click", (e) => {
+    e.stopPropagation();
+    dropdownMenu?.classList.toggle("hidden");
+    dropdownMenu?.classList.toggle("flex");
+  });
+
+  dropdownLinks.forEach((link) => {
+    link.addEventListener("click", () => {
+      dropdownMenu?.classList.add("hidden");
+      dropdownMenu?.classList.remove("flex");
+    });
+  });
+
+  document.addEventListener("click", (e) => {
+    if (!menuBtn?.contains(e.target) && !dropdownMenu?.contains(e.target)) {
+      dropdownMenu?.classList.add("hidden");
+      dropdownMenu?.classList.remove("flex");
+    }
+  });
+});
+
+// دالة التبديل العامة
+function handleThemeToggle() {
+  const isDark = document.documentElement.classList.toggle("dark");
+  localStorage.setItem("theme", isDark ? "dark" : "light");
+}
+
+// ربط الزر القديم والزر الجديد بنفس الدالة
+document
+  .getElementById("theme-toggle-button")
+  ?.addEventListener("click", handleThemeToggle);
+document
+  .getElementById("theme-toggle-button-dropdown")
+  ?.addEventListener("click", handleThemeToggle);
