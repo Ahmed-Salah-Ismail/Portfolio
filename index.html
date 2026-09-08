@@ -134,7 +134,9 @@
             أحمد صلاح
           </div>
         </div>
-        <div class="nav-links flex gap-8 items-center" role="menubar">
+
+        <!-- نضيف hidden md:flex عشان تختفي في الموبايل وتظهر في الديسكتوب -->
+        <div class="nav-links hidden md:flex gap-8 items-center" role="menubar">
           <a
             class="text-slate-600 dark:text-slate-300 hover:text-primary transition-colors duration-300 text-lg"
             href="#hero-section"
@@ -171,24 +173,21 @@
             role="menuitem"
             >تواصل</a
           >
-          <!-- Theme Toggle Button -->
+
+          <!-- Theme Toggle Button (ديسكتوب) -->
           <button
-            id="theme-toggle-button"
-            class="relative w-16 h-8 bg-slate-200 dark:bg-slate-700 rounded-full transition-all duration-300 hover:ring-2 hover:ring-primary/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+            class="theme-toggle-button relative w-16 h-8 bg-slate-200 dark:bg-slate-700 rounded-full transition-all duration-300 hover:ring-2 hover:ring-primary/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             aria-label="تبديل الوضع الداكن"
             aria-pressed="false"
             type="button"
           >
-            <!-- Toggle Circle with Icon -->
             <span
               class="theme-toggle-circle absolute top-1 left-1 w-6 h-6 bg-white dark:bg-slate-800 rounded-full shadow-md flex items-center justify-center transition-transform duration-300 dark:translate-x-8"
             >
-              <!-- Sun Icon (visible in light mode) -->
               <i
                 class="fa-solid fa-sun text-amber-500 text-sm transition-all duration-300 dark:opacity-0 dark:rotate-90 dark:scale-0"
                 aria-hidden="true"
               ></i>
-              <!-- Moon Icon (visible in dark mode) -->
               <i
                 class="fa-solid fa-moon text-indigo-400 text-sm absolute transition-all duration-300 opacity-0 -rotate-90 scale-0 dark:opacity-100 dark:rotate-0 dark:scale-100"
                 aria-hidden="true"
@@ -196,80 +195,86 @@
             </span>
           </button>
         </div>
-        <div class="relative inline-block lg:hidden">
-          <!-- زرار الهامبرغر -->
+
+        <!-- زرار الموبايل منيو: ظاهر بس في الموبايل -->
+        <div id="my-menu" class="flex md:hidden">
           <button
-            id="mobile-menu-btn"
-            class="mobile-menu-btn text-slate-900 dark:text-white text-2xl focus:outline-none p-2"
-            aria-label="فتح القائمة"
             type="button"
+            id="menu-toggle"
+            aria-label="فتح القائمة"
+            aria-expanded="false"
+            aria-controls="mobile-menu-panel"
           >
-            <i class="fa-solid fa-bars"></i>
+            <i
+              id="menu-toggle-icon"
+              class="fa-solid fa-bars text-slate-600 dark:text-slate-300 hover:text-primary transition-colors duration-300 text-2xl"
+            ></i>
           </button>
-
-          <!-- القائمة المنسدلة -->
-          <div
-            id="dropdown-menu"
-            class="absolute left-0 mt-2 w-48 bg-white dark:bg-slate-900 rounded-xl shadow-xl border border-slate-200 dark:border-slate-800 py-2 hidden flex-col z-50"
-          >
-            <a
-              class="dropdown-link px-4 py-2 text-slate-600 dark:text-slate-300 hover:text-primary hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors text-base font-medium"
-              href="#hero-section"
-              >الرئيسية</a
-            >
-            <a
-              class="dropdown-link px-4 py-2 text-slate-600 dark:text-slate-300 hover:text-primary hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors text-base font-medium"
-              href="#about"
-              >عني</a
-            >
-            <a
-              class="dropdown-link px-4 py-2 text-slate-600 dark:text-slate-300 hover:text-primary hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors text-base font-medium"
-              href="#portfolio"
-              >الأعمال</a
-            >
-            <a
-              class="dropdown-link px-4 py-2 text-slate-600 dark:text-slate-300 hover:text-primary hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors text-base font-medium"
-              href="#experience"
-              >الخبرة</a
-            >
-            <a
-              class="dropdown-link px-4 py-2 text-slate-600 dark:text-slate-300 hover:text-primary hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors text-base font-medium"
-              href="#testimonials"
-              >التوصيات</a
-            >
-            <a
-              class="dropdown-link px-4 py-2 text-slate-600 dark:text-slate-300 hover:text-primary hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors text-base font-medium"
-              href="#contact"
-              >تواصل</a
-            >
-
-            <!-- زرار الـ Dark Mode بعد إعطائه id جديد ومختلف -->
-            <div
-              class="px-4 py-2 flex items-center justify-between border-t border-slate-100 dark:border-slate-800 mt-2"
-            >
-              <button
-                id="theme-toggle-button-dropdown"
-                class="relative w-16 h-8 bg-slate-200 dark:bg-slate-700 rounded-full transition-all duration-300 hover:ring-2 hover:ring-primary/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-                aria-label="تبديل الوضع الداكن"
-                aria-pressed="false"
-                type="button"
-              >
-                <span
-                  class="theme-toggle-circle absolute top-1 left-1 w-6 h-6 bg-white dark:bg-slate-800 rounded-full shadow-md flex items-center justify-center transition-transform duration-300 dark:translate-x-8"
-                >
-                  <i
-                    class="fa-solid fa-sun text-amber-500 text-sm transition-all duration-300 dark:opacity-0 dark:rotate-90 dark:scale-0"
-                    aria-hidden="true"
-                  ></i>
-                  <i
-                    class="fa-solid fa-moon text-indigo-400 text-sm absolute transition-all duration-300 opacity-0 -rotate-90 scale-0 dark:opacity-100 dark:rotate-0 dark:scale-100"
-                    aria-hidden="true"
-                  ></i>
-                </span>
-              </button>
-            </div>
-          </div>
         </div>
+      </div>
+
+      <!-- Panel القايمة بتاع الموبايل -->
+      <div
+        id="mobile-menu-panel"
+        class="hidden md:hidden flex-col gap-1 px-4 pb-5 bg-white/95 dark:bg-slate-950/95 backdrop-blur-md border-t border-slate-200 dark:border-slate-800"
+      >
+        <a
+          class="block py-3 text-slate-600 dark:text-slate-300 hover:text-primary transition-colors duration-300 text-lg"
+          href="#hero-section"
+          role="menuitem"
+          >الرئيسية</a
+        >
+        <a
+          class="block py-3 text-slate-600 dark:text-slate-300 hover:text-primary transition-colors duration-300 text-lg"
+          href="#about"
+          role="menuitem"
+          >عني</a
+        >
+        <a
+          class="block py-3 text-slate-600 dark:text-slate-300 hover:text-primary transition-colors duration-300 text-lg"
+          href="#portfolio"
+          role="menuitem"
+          >الأعمال</a
+        >
+        <a
+          class="block py-3 text-slate-600 dark:text-slate-300 hover:text-primary transition-colors duration-300 text-lg"
+          href="#experience"
+          role="menuitem"
+          >الخبرة</a
+        >
+        <a
+          class="block py-3 text-slate-600 dark:text-slate-300 hover:text-primary transition-colors duration-300 text-lg"
+          href="#testimonials"
+          role="menuitem"
+          >التوصيات</a
+        >
+        <a
+          class="block py-3 text-slate-600 dark:text-slate-300 hover:text-primary transition-colors duration-300 text-lg"
+          href="#contact"
+          role="menuitem"
+          >تواصل</a
+        >
+
+        <!-- Theme Toggle Button (موبايل) -->
+        <button
+          class="theme-toggle-button relative w-16 h-8 mt-2 bg-slate-200 dark:bg-slate-700 rounded-full transition-all duration-300 hover:ring-2 hover:ring-primary/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+          aria-label="تبديل الوضع الداكن"
+          aria-pressed="false"
+          type="button"
+        >
+          <span
+            class="theme-toggle-circle absolute top-1 left-1 w-6 h-6 bg-white dark:bg-slate-800 rounded-full shadow-md flex items-center justify-center transition-transform duration-300 dark:translate-x-8"
+          >
+            <i
+              class="fa-solid fa-sun text-amber-500 text-sm transition-all duration-300 dark:opacity-0 dark:rotate-90 dark:scale-0"
+              aria-hidden="true"
+            ></i>
+            <i
+              class="fa-solid fa-moon text-indigo-400 text-sm absolute transition-all duration-300 opacity-0 -rotate-90 scale-0 dark:opacity-100 dark:rotate-0 dark:scale-100"
+              aria-hidden="true"
+            ></i>
+          </span>
+        </button>
       </div>
     </nav>
 

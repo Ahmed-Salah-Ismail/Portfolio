@@ -1,22 +1,22 @@
 // ^ Write your JavaScript code here
 
-var darkMode = document.getElementById("theme-toggle-button");
+// var darkMode = document.getElementById("theme-toggle-button");
 
-if (localStorage.getItem("darkMode") === "true") {
-  document.documentElement.classList.add("dark");
-} else {
-  document.documentElement.classList.remove("dark");
-}
+// if (localStorage.getItem("darkMode") === "true") {
+//   document.documentElement.classList.add("dark");
+// } else {
+//   document.documentElement.classList.remove("dark");
+// }
 
-function toggleDarkMode() {
-  console.log("dark mode toggled");
-  document.documentElement.classList.toggle("dark");
-  var isDark = document.documentElement.classList.contains("dark");
-  localStorage.setItem("darkMode", isDark);
-  console.log(isDark);
-}
+// function toggleDarkMode() {
+//   console.log("dark mode toggled");
+//   document.documentElement.classList.toggle("dark");
+//   var isDark = document.documentElement.classList.contains("dark");
+//   localStorage.setItem("darkMode", isDark);
+//   console.log(isDark);
+// }
 
-darkMode.addEventListener("click", toggleDarkMode);
+// darkMode.addEventListener("click", toggleDarkMode);
 
 // Scroll to top button
 
@@ -282,42 +282,58 @@ document.addEventListener("click", function (e) {
     }
   });
 });
+
+//
+
+// script.js
+
 document.addEventListener("DOMContentLoaded", () => {
-  const menuBtn = document.getElementById("mobile-menu-btn");
-  const dropdownMenu = document.getElementById("dropdown-menu");
-  const dropdownLinks = document.querySelectorAll(".dropdown-link");
+  // ---------- Dark Mode ----------
+  var darkModeButtons = document.querySelectorAll(".theme-toggle-button");
 
-  menuBtn?.addEventListener("click", (e) => {
-    e.stopPropagation();
-    dropdownMenu?.classList.toggle("hidden");
-    dropdownMenu?.classList.toggle("flex");
+  if (localStorage.getItem("darkMode") === "true") {
+    document.documentElement.classList.add("dark");
+  } else {
+    document.documentElement.classList.remove("dark");
+  }
+
+  function toggleDarkMode() {
+    document.documentElement.classList.toggle("dark");
+    var isDark = document.documentElement.classList.contains("dark");
+    localStorage.setItem("darkMode", isDark);
+  }
+
+  darkModeButtons.forEach((btn) => {
+    btn.addEventListener("click", toggleDarkMode);
   });
 
-  dropdownLinks.forEach((link) => {
-    link.addEventListener("click", () => {
-      dropdownMenu?.classList.add("hidden");
-      dropdownMenu?.classList.remove("flex");
-    });
-  });
+  // ---------- Mobile Menu ----------
+  const menuToggle = document.getElementById("menu-toggle");
+  const menuToggleIcon = document.getElementById("menu-toggle-icon");
+  const mobileMenuPanel = document.getElementById("mobile-menu-panel");
 
-  document.addEventListener("click", (e) => {
-    if (!menuBtn?.contains(e.target) && !dropdownMenu?.contains(e.target)) {
-      dropdownMenu?.classList.add("hidden");
-      dropdownMenu?.classList.remove("flex");
+  menuToggle.addEventListener("click", () => {
+    const isHidden = mobileMenuPanel.classList.contains("hidden");
+
+    if (isHidden) {
+      mobileMenuPanel.classList.remove("hidden");
+      mobileMenuPanel.classList.add("flex");
+      menuToggle.setAttribute("aria-expanded", "true");
+      menuToggleIcon.classList.replace("fa-bars", "fa-xmark");
+    } else {
+      mobileMenuPanel.classList.add("hidden");
+      mobileMenuPanel.classList.remove("flex");
+      menuToggle.setAttribute("aria-expanded", "false");
+      menuToggleIcon.classList.replace("fa-xmark", "fa-bars");
     }
   });
+
+  mobileMenuPanel.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      mobileMenuPanel.classList.add("hidden");
+      mobileMenuPanel.classList.remove("flex");
+      menuToggle.setAttribute("aria-expanded", "false");
+      menuToggleIcon.classList.replace("fa-xmark", "fa-bars");
+    });
+  });
 });
-
-// دالة التبديل العامة
-function handleThemeToggle() {
-  const isDark = document.documentElement.classList.toggle("dark");
-  localStorage.setItem("theme", isDark ? "dark" : "light");
-}
-
-// ربط الزر القديم والزر الجديد بنفس الدالة
-document
-  .getElementById("theme-toggle-button")
-  ?.addEventListener("click", handleThemeToggle);
-document
-  .getElementById("theme-toggle-button-dropdown")
-  ?.addEventListener("click", handleThemeToggle);
